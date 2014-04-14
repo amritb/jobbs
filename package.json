@@ -8,6 +8,9 @@
     "morgan": "~1.0.0",
     "body-parser": "~1.0.0",
     "method-override": "~1.0.0",
-    "jade": "1.x"
+    "jade": "1.x",
+    "should": "3.x",
+    "feedparser": "0.x"
+    // "request":
   }
 }

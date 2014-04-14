@@ -11,6 +11,5 @@
     "jade": "1.x",
     "should": "3.x",
     "feedparser": "0.x"
-    // "request":
   }
 }

@@ -1,8 +1,6 @@
 var should = require('should')
-  , FeedParser = require('feedparser')
-  , request = require('request')
   , dns = require('dns')
-  , careers20 = require('../lib/careers20.js');
+  , lib = require('../lib/lib.js');
 
 // Create a new test suite for our searching crawl/activity
 describe('Remote jobs tests:', function() {
@@ -19,36 +17,16 @@ describe('Remote jobs tests:', function() {
   });
 
   it('Get feed from Careers 2.0 (Stackoverflow)', function(done) {
-    var req = request('http://careers.stackoverflow.com/jobs/feed?searchTerm=&allowsremote=True')
-      , feedparser = new FeedParser();
-
-    req.on('error', function(e) {
-      done(e);
-    });
-
-    req.on('response', function(res){
-      var stream = this;
-      console.error(res.bodt);
-      if(res.statusCode !== 200) done(new Error('wrong status code'));
-      stream.pipe(feedparser);
-    });
-
-    feedparser.on('error', function(e) {
-      done(e);
-    });
-
-    feedparser.on('readable', function() {
-      var stream = this
-        , meta = this.meta
-        , item;
-
-      while (item = stream.read()) {
-        console.log(item.title);
-      }
-
-    });
-
-    feedparser.on('end', function(){ done() });
+    lib.careers20(done, 'test');
   });
+
+  it('Get feed from AuthenticJobs', function(done) {
+    lib.authenticjobs(done, 'test');
+  });
+
+  it('Get feed from GitHub jobs', function(done) {
+    lib.github(done, 'test');
+  });
+
 });
 

@@ -1,7 +1,5 @@
-var candidateController = require('./controllers/candidate.js');
+var controller = require('./controllers/controller.js');
 
 module.exports = function(app) {
-  /*app.get('/', function(req, res){
-    res.render('index');
-  });*/
+  app.get('/data.json', controller);
 }

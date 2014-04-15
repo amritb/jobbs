@@ -15,7 +15,7 @@ describe('Remote jobs tests:', function() {
       }
     })
   });
-/*
+
   it('Get feed from Careers 2.0 (Stackoverflow)', function(done) {
     lib.careers20(done, 'test');
   });
@@ -31,7 +31,6 @@ describe('Remote jobs tests:', function() {
   it('Get feed from WeWorkRemotely jobs', function(done) {
     lib.github(done, 'test');
   });
-*/
 
 });
 

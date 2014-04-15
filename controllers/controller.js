@@ -1,8 +1,9 @@
 var async = require('async')
-  , lib = require('../lib/lib.js');
-
-lib();
+  , lib = require('../lib/lib.js')
+  , task = require('../lib/task.js');
 
 module.exports = function(req, res) {
-  res.send('123');
+  task(function(data){
+    res.json(data);
+  });
 }

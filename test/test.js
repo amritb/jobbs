@@ -33,4 +33,3 @@ describe('Remote jobs tests:', function() {
   });
 
 });
-

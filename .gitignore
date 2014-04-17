@@ -14,5 +14,6 @@ logs
 results
 
 npm-debug.log
+public/data
 public/uploads
 node_modules

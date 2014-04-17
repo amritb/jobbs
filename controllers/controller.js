@@ -4,6 +4,6 @@ var async = require('async')
 
 module.exports = function(req, res) {
   task(function(data){
-    res.json(data);
+    res.redirect('/');
   });
 }

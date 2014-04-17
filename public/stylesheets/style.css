@@ -1,0 +1,11 @@
+h2.title {
+  cursor: pointer;
+}
+
+.description {
+  display: none;
+}
+
+.description img {
+  display: none;
+}

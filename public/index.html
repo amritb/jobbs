@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JoBBs</title>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/slate/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  </head>
+  <body>
+
+  <script type="text/x-handlebars">
+    <div class="navbar navbar-default navbar-static-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header text-center">
+          <a class="navbar-brand" href="/">JoBBs</a>
+          <span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        {{outlet}}
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="index">
+    <div class="col-sm-3">
+      <div class="well well-sm">
+        <form class="form-inline" role="form">
+          <div class="form-group">
+            <input type="keyword" class="form-control" id="keyword" placeholder="Keyword">
+            <button type="submit" class="btn btn-default">Filter</button>
+          </div>
+        </form>
+        <div class="list-group">
+          {{link-to 'Rails' 'term' 'rails'}}
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <div class="list-group">
+        {{#each}}
+          <div class="list-group-item">
+            <h2 class="title">{{title}}</h2>
+            <p class="mute small">{{format-date date}}</p>
+            <div class="description well well-sm">
+              <p>{{{description}}}</p>
+              <a {{bind-attr href=link}} class="btn btn-success btn-lg btn-block">Apply</a>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </script>
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ember.js/1.5.0/ember.js"></script>
+    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/data/data.js"></script>
+    <script type="text/javascript" src="/javascripts/app.js"></script>
+  </body>
+</html>

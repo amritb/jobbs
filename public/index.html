@@ -11,7 +11,7 @@
     <div class="navbar navbar-default navbar-static-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header text-center">
-          <a class="navbar-brand" href="/">JoBBs</a>
+          <a class="navbar-brand" href="/#/">JoBBs</a>
           <span></span>
         </div>
       </div>
@@ -57,12 +57,30 @@
     </div>
   </script>
 
+  <script type="text/x-handlebars" data-template-name="term">
+    <div class="col-sm-9">
+      <div class="list-group">
+        {{#each}}
+          <div class="list-group-item">
+            <h2 class="title">{{title}}</h2>
+            <p class="mute small">{{format-date date}}</p>
+            <div class="description well well-sm">
+              <p>{{{description}}}</p>
+              <a {{bind-attr href=link}} class="btn btn-success btn-lg btn-block">Apply</a>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </script>
+
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ember.js/1.5.0/ember.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ember-data.js/1.0.0-beta.7/ember-data.min.js"></script>
     <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/data/data.js"></script>
     <script type="text/javascript" src="/javascripts/app.js"></script>
+    <script type="text/javascript" src="/data/data.js"></script>
   </body>
 </html>

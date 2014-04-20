@@ -1,39 +1,50 @@
 App = Ember.Application.create();
+App.ApplicationAdapter = DS.FixtureAdapter.extend();
+
+App.Job = DS.Model.extend({
+  title: DS.attr('string'),
+  description: DS.attr('string'),
+  link: DS.attr('string'),
+  date: DS.attr('date')
+});
 
 App.Router.map(function(){
-  this.route('index', { path: '/' });
   this.route('term', { path: '/:term' });
 });
 
 App.IndexRoute = Ember.Route.extend({
   model: function() {
-    return data.map(function(item){
-      item.description = decodeURI(item.description);
-      return item;
-    });
+    return this.store.find('job');
   }
 });
 
 App.TermRoute = Ember.Route.extend({
   model: function(params){
-    var filtered = data.filter(function(item) {
+    return [{title: params.term, description: 'cool'}];
+    /*var filtered = data.filter(function(item) {
       return item.title.toLowerCase().indexOf(params.term.toLowerCase()) !== -1 || item.description.toLowerCase().indexOf(params.term.toLowerCase()) !== -1;
     });
+    return filtered;*/
+    /*
     return filtered.map(function(item){
-      item.description = decodeURI(item.description);
+      console.log(item);
+      // item.set('description', decodeURI(item.description));
       return item;
-    });
-  },
+    });*/
+  }/*,
 
   renderTemplate: function() {
     this.render('index');
-  }
+  }*/
 });
 
 Ember.Handlebars.helper('format-date', function(date) {
   return moment(date).fromNow();
 });
 
+Ember.Handlebars.helper('decode-description', function(description) {
+  return decodeURI(description);
+});
 
 App.TermView = App.IndexView = Ember.View.extend({
   didInsertElement: function() {

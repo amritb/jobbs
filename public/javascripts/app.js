@@ -20,7 +20,8 @@ App.IndexRoute = Ember.Route.extend({
 
 App.TermRoute = Ember.Route.extend({
   model: function(params){
-    return [{title: params.term, description: 'cool'}];
+    var jobs = this.store.find('job');
+    return [{title: params.term, description: 'desc'}];
     /*var filtered = data.filter(function(item) {
       return item.title.toLowerCase().indexOf(params.term.toLowerCase()) !== -1 || item.description.toLowerCase().indexOf(params.term.toLowerCase()) !== -1;
     });
@@ -46,13 +47,23 @@ Ember.Handlebars.helper('decode-description', function(description) {
   return decodeURI(description);
 });
 
+/*
 App.TermView = App.IndexView = Ember.View.extend({
   didInsertElement: function() {
-    this._super();
     Ember.run.scheduleOnce('afterRender', this, function() {
       $('h2.title').click(function(){
+        console.log('clicked');
         $(this).parent().find('.description').slideToggle('fast');
       });
     });
+  }
+});
+*/
+
+App.ClickableView = Ember.View.extend({
+  click: function(evt) {
+    var elem = this.get('element');
+    console.log(elem);
+    $(elem).parent().find('.description').slideToggle('fast');
   }
 });

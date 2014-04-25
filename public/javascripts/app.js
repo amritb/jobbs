@@ -20,18 +20,20 @@ App.IndexRoute = Ember.Route.extend({
 
 App.TermRoute = Ember.Route.extend({
   model: function(params){
-    var jobs = this.store.find('job');
-    return [{title: params.term, description: 'desc'}];
-    /*var filtered = data.filter(function(item) {
+
+    var filtered = App.Job.FIXTURES.filter(function(item) {
       return item.title.toLowerCase().indexOf(params.term.toLowerCase()) !== -1 || item.description.toLowerCase().indexOf(params.term.toLowerCase()) !== -1;
     });
-    return filtered;*/
-    /*
-    return filtered.map(function(item){
-      console.log(item);
-      // item.set('description', decodeURI(item.description));
-      return item;
-    });*/
+    // return filtered;
+
+    for (var i = filtered.length - 1; i >= 0; i--) {
+      try {
+        filtered[i]['description'] = decodeURI(filtered[i]['description']);
+      } catch (e) {
+        console.log('decodeURI handelled.');
+      }
+    };
+    return filtered;
   }/*,
 
   renderTemplate: function() {
@@ -47,23 +49,9 @@ Ember.Handlebars.helper('decode-description', function(description) {
   return decodeURI(description);
 });
 
-/*
-App.TermView = App.IndexView = Ember.View.extend({
-  didInsertElement: function() {
-    Ember.run.scheduleOnce('afterRender', this, function() {
-      $('h2.title').click(function(){
-        console.log('clicked');
-        $(this).parent().find('.description').slideToggle('fast');
-      });
-    });
-  }
-});
-*/
-
 App.ClickableView = Ember.View.extend({
   click: function(evt) {
     var elem = this.get('element');
-    console.log(elem);
     $(elem).parent().find('.description').slideToggle('fast');
   }
 });

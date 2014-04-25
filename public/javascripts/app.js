@@ -30,7 +30,7 @@ App.TermRoute = Ember.Route.extend({
       try {
         filtered[i]['description'] = decodeURI(filtered[i]['description']);
       } catch (e) {
-        console.log('decodeURI handelled.');
+        console.log('decodeURI error caught.');
       }
     };
     return filtered;

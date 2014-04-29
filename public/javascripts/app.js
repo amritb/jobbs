@@ -1,11 +1,21 @@
-App = Ember.Application.create();
+App = Ember.Application.create({
+  LOG_TRANSITIONS: true,
+  // LOG_TRANSITIONS_INTERNAL: true
+});
 App.ApplicationAdapter = DS.FixtureAdapter.extend();
 
 App.Job = DS.Model.extend({
   title: DS.attr('string'),
   description: DS.attr('string'),
   link: DS.attr('string'),
-  date: DS.attr('date')
+  date: DS.attr('date'),
+  description_processed: function() {
+    var r = this.get('description');
+    try {
+      r = decodeURI(r);
+    } catch (e) {}
+    return r;
+  }.property('description')
 });
 
 App.Router.map(function(){
@@ -21,32 +31,22 @@ App.IndexRoute = Ember.Route.extend({
 App.TermRoute = Ember.Route.extend({
   model: function(params){
 
-    var filtered = App.Job.FIXTURES.filter(function(item) {
+    return this.store.filter('job', function(item){
+      // console.log(item.get('title'))
+      // return item.get('title').toLowerCase().indexOf(params.term.toLowerCase()) !== -1 || item.get('description_processed').toLowerCase().indexOf(params.term.toLowerCase()) !== -1;
+      return true;
+    });
+
+    /*
+    var filtered = this.store.find('job').filter(function(item) {
       return item.title.toLowerCase().indexOf(params.term.toLowerCase()) !== -1 || item.description.toLowerCase().indexOf(params.term.toLowerCase()) !== -1;
     });
-    // return filtered;
-
-    for (var i = filtered.length - 1; i >= 0; i--) {
-      try {
-        filtered[i]['description'] = decodeURI(filtered[i]['description']);
-      } catch (e) {
-        console.log('decodeURI error caught.');
-      }
-    };
-    return filtered;
-  }/*,
-
-  renderTemplate: function() {
-    this.render('index');
-  }*/
+    return filtered;*/
+  }
 });
 
 Ember.Handlebars.helper('format-date', function(date) {
   return moment(date).fromNow();
-});
-
-Ember.Handlebars.helper('decode-description', function(description) {
-  return decodeURI(description);
 });
 
 App.ClickableView = Ember.View.extend({

@@ -30,18 +30,10 @@ App.IndexRoute = Ember.Route.extend({
 
 App.TermRoute = Ember.Route.extend({
   model: function(params){
-
+    this.store.find('job');
     return this.store.filter('job', function(item){
-      // console.log(item.get('title'))
-      // return item.get('title').toLowerCase().indexOf(params.term.toLowerCase()) !== -1 || item.get('description_processed').toLowerCase().indexOf(params.term.toLowerCase()) !== -1;
-      return true;
+      return item.get('title').toLowerCase().indexOf(params.term.toLowerCase()) !== -1 || item.get('description_processed').toLowerCase().indexOf(params.term.toLowerCase()) !== -1;
     });
-
-    /*
-    var filtered = this.store.find('job').filter(function(item) {
-      return item.title.toLowerCase().indexOf(params.term.toLowerCase()) !== -1 || item.description.toLowerCase().indexOf(params.term.toLowerCase()) !== -1;
-    });
-    return filtered;*/
   }
 });
 
